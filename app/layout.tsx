@@ -24,12 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <RegisterModal />
-          <LoginModal />
-          <Navbar />
-        </ClientOnly>
+        {/* <ClientOnly> */}
+        <ToasterProvider />
+        <RegisterModal />
+        <LoginModal />
+        <Navbar />
+        {/* </ClientOnly> */}
         {children}
       </body>
     </html>
