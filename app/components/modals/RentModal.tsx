@@ -10,11 +10,11 @@ import { useMemo, useState } from "react";
 import useRentModal from "@/app/hooks/useRentModal";
 
 import Modal from "./Modal";
-// import Counter from "../inputs/Counter";
+import Counter from "../inputs/Counter";
 import CategoryInput from "../inputs/CategoryInput";
-// import CountrySelect from "../inputs/CountrySelect";
+import CountrySelect from "../inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
-// import ImageUpload from "../inputs/ImageUpload";
+import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 
@@ -62,13 +62,13 @@ const RentModal = () => {
   const bathroomCount = watch("bathroomCount");
   const imageSrc = watch("imageSrc");
 
-  // const Map = useMemo(
-  //   () =>
-  //     dynamic(() => import("../Map"), {
-  //       ssr: false,
-  //     }),
-  //   [location]
-  // );
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -166,11 +166,11 @@ const RentModal = () => {
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
-        {/* <CountrySelect
+        <CountrySelect
           value={location}
           onChange={(value) => setCustomValue("location", value)}
         />
-        <Map center={location?.latlng} /> */}
+        <Map center={location?.latlng} />
       </div>
     );
   }
@@ -182,7 +182,7 @@ const RentModal = () => {
           title="Share some basics about your place"
           subtitle="What amenitis do you have?"
         />
-        {/* <Counter
+        <Counter
           onChange={(value) => setCustomValue("guestCount", value)}
           value={guestCount}
           title="Guests"
@@ -201,7 +201,7 @@ const RentModal = () => {
           value={bathroomCount}
           title="Bathrooms"
           subtitle="How many bathrooms do you have?"
-        /> */}
+        />
       </div>
     );
   }
@@ -213,10 +213,10 @@ const RentModal = () => {
           title="Add a photo of your place"
           subtitle="Show guests what your place looks like!"
         />
-        {/* <ImageUpload
+        <ImageUpload
           onChange={(value) => setCustomValue("imageSrc", value)}
           value={imageSrc}
-        /> */}
+        />
       </div>
     );
   }
