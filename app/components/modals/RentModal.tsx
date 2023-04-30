@@ -61,6 +61,8 @@ const RentModal = () => {
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
   const imageSrc = watch("imageSrc");
+  const title = watch("title");
+  const description = watch("description");
 
   const Map = useMemo(
     () =>
@@ -83,7 +85,15 @@ const RentModal = () => {
   };
 
   const onNext = () => {
-    setStep((value) => value + 1);
+    if (category === "" && step === 0) {
+      return toast.error("You must select a category");
+    }
+    if (location === null && step === 1) {
+      return toast.error("You must select a location");
+    }
+    if (imageSrc === "" && step === 3) {
+      return toast.error("You must upload an image");
+    } else setStep((value) => value + 1);
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {

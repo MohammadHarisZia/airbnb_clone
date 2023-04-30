@@ -1,7 +1,6 @@
 import { Nunito } from "next/font/google";
 
 import Navbar from "@/app/components/navbar/Navbar";
-import ClientOnly from "@/app/components/ClientOnly";
 import RegisterModal from "@/app/components/modals/RegisterModal";
 import LoginModal from "@/app/components/modals/LoginModal";
 import RentModal from "./components/modals/RentModal";
@@ -26,16 +25,14 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="icon" href="/airbnb.ico" sizes="any" />
       <body className={font.className}>
-        {/* <ClientOnly> */}
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
         <RentModal />
         <Navbar currentUser={currentUser} />
-        {/* </ClientOnly> */}
-        {children}
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );
