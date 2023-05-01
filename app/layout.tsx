@@ -1,22 +1,28 @@
 import { Nunito } from "next/font/google";
 
 import Navbar from "@/app/components/navbar/Navbar";
-import RegisterModal from "@/app/components/modals/RegisterModal";
 import LoginModal from "@/app/components/modals/LoginModal";
-import RentModal from "./components/modals/RentModal";
-import "./globals.css";
-import ToasterProvider from "./providers/ToasterProvider";
-import getCurrentUser from "./actions/getCurrentUser";
-import SearchModal from "./components/modals/SearchModal";
+import RegisterModal from "@/app/components/modals/RegisterModal";
+import SearchModal from "@/app/components/modals/SearchModal";
+import RentModal from "@/app/components/modals/RentModal";
 
-const font = Nunito({
-  subsets: ["latin"],
-});
+import ToasterProvider from "@/app/providers/ToasterProvider";
+
+import "./globals.css";
+import ClientOnly from "./components/ClientOnly";
+import getCurrentUser from "./actions/getCurrentUser";
 
 export const metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
+
+const font = Nunito({
+  subsets: ["latin"],
+});
 
 export default async function RootLayout({
   children,
@@ -24,16 +30,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
-      <link rel="icon" href="/airbnb.ico" sizes="any" />
       <body className={font.className}>
-        <ToasterProvider />
-        <RegisterModal />
-        <LoginModal />
-        <RentModal />
-        <SearchModal />
-        <Navbar currentUser={currentUser} />
+        <ClientOnly>
+          <ToasterProvider />
+          <LoginModal />
+          <RegisterModal />
+          <SearchModal />
+          <RentModal />
+          <Navbar currentUser={currentUser} />
+        </ClientOnly>
         <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
